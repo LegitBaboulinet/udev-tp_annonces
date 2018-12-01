@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>{{titre}}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          type="text/css"/>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js">
+    </script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js">
+    </script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>Créer une nouvelle annonce</h2>
+            <form action="index.php?action=newannonce" class="form mt-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Oeufs de dragon" name="title"/>
+                </div>
+                <div class="form-group">
+                    <textarea cols="8" rows="20" class="form-control"
+                              placeholder="Parfait état, à mettre à la chaleur.."
+                              name="content"></textarea>
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Créer l'annonce
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
