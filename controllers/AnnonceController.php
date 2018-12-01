@@ -11,16 +11,19 @@ include 'views/AnnonceView.php';
 
 class AnnonceController
 {
+    /**
+     * @var AnnonceView
+     */
     private $view;
 
+    /**
+     * AnnonceController constructor.
+     */
     public function __construct()
     {
         $this->view = new AnnonceView();
     }
 
-    /**
-     * displayNewAnnonce
-     */
     public function displayNewAnnonce()
     {
         $this->view->displayNewAnnonce();

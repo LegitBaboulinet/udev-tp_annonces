@@ -8,9 +8,11 @@
 
 class AnnonceView
 {
+    /**
+     * AnnonceView constructor.
+     */
     public function __construct()
     {
-
     }
 
     public function displayNewAnnonce()
