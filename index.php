@@ -30,9 +30,9 @@ if ($db != null) {
                 break;
             case 'userannonce':
                 if (isset($_GET['utilisateur'])) {
-                    // Afficher les annonces de l'utilisateur donné en paramètre
+                    // TODO Afficher les annonces de l'utilisateur donné en paramètre
                 } else {
-                    // Afficher tous les utilisateurs ayant posté au moins une annonce
+                    // TODO Afficher tous les utilisateurs ayant posté au moins une annonce
                 }
                 break;
         }
@@ -43,7 +43,7 @@ if ($db != null) {
                 break;
         }
     } else {
-        // TODO Afficher la page principale
+        $annonceController->displayAnnonces();
     }
 } else {
     echo 'Erreur de connexion à la base de données : ' . $connexion->getError();

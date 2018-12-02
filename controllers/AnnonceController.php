@@ -39,6 +39,19 @@ class AnnonceController
         $this->errorView = new ErrorView();
     }
 
+    public function displayAnnonces()
+    {
+        // Récupération des annonces
+        $annonces = $this->model->charger();
+
+        // Affichage des annonces
+        if ($annonces != null) {
+            $this->view->displayAnnonces($annonces);
+        } else {
+            $this->errorView->displayError();
+        }
+    }
+
     public function displayNewAnnonce()
     {
         $this->view->displayNewAnnonce();
@@ -62,7 +75,7 @@ class AnnonceController
         if ($annonce->getTitle() != null && $annonce->getContent()) {
             // Sauvegarde dans la base de données
             if ($this->model->sauvegarder($annonce)) {
-                // TODO Afficher la page principale
+                $this->displayAnnonces();
             } else {
                 $this->errorView->displayError();
             }
