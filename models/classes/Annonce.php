@@ -30,17 +30,9 @@ class Annonce
 
     /**
      * Annonce constructor.
-     * @param int $id
-     * @param string $title
-     * @param string $content
-     * @param DateTime $date
      */
-    public function __construct($id, $title, $content, DateTime $date)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->title = $title;
-        $this->content = $content;
-        $this->date = $date;
     }
 
     /**

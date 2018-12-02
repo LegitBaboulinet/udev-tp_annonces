@@ -6,14 +6,45 @@
  * Time: 15:39
  */
 
+include 'libs/Connexion.php';
 include 'controllers/AnnonceController.php';
 
-$annonceController = new AnnonceController();
+// Connexion à la base de données
+$connexion = new Connexion();
+$db = $connexion->getDb();
 
-if (isset($_GET['page'])) {
-    switch ($_GET['page']) {
-        case 'newannonce':
-            $annonceController->displayNewAnnonce();
-            break;
+if ($db != null) {
+    // Liaison des contrôleurs
+    $annonceController = new AnnonceController($db);
+
+    if (isset($_GET['page'])) {
+        switch ($_GET['page']) {
+            case 'newannonce':
+                $annonceController->displayNewAnnonce();
+                break;
+            case 'newuser':
+                // TODO Gérer la création d'un nouvel utilisateur
+                break;
+            case 'login':
+                // TODO Gérer la connexion d'un utilisateur
+                break;
+            case 'userannonce':
+                if (isset($_GET['utilisateur'])) {
+                    // Afficher les annonces de l'utilisateur donné en paramètre
+                } else {
+                    // Afficher tous les utilisateurs ayant posté au moins une annonce
+                }
+                break;
+        }
+    } elseif (isset($_GET['action'])) {
+        switch ($_GET['action']) {
+            case 'newannonce':
+                $annonceController->newAnnonce();
+                break;
+        }
+    } else {
+        // TODO Afficher la page principale
     }
+} else {
+    echo 'Erreur de connexion à la base de données : ' . $connexion->getError();
 }

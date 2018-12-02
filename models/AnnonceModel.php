@@ -11,20 +11,36 @@ include 'models/classes/Annonce.php';
 
 class AnnonceModel
 {
+    /**
+     * @var PDO
+     */
+    private $db;
 
     /**
      * AnnonceModel constructor.
+     * @param $db PDO
      */
-    public function __construct()
+    public function __construct($db)
     {
-        // TODO Récupérer la connexion à la base de données
+        $this->db = $db;
     }
 
     /**
      * @param Annonce $annonce
+     * @return bool
      */
     public function sauvegarder(Annonce $annonce)
     {
-        // TODO Sauvegarder l'annonce dans la base de données
+        // Préparation de la requête SQL
+        $query = $this->db->prepare('INSERT INTO Annonce (title, content) VALUES (?, ?)');
+
+        // Exécution de la requête SQL
+        $success = $query->execute(array($annonce->getTitle(), $annonce->getContent()));
+
+        // Vérification des résultats
+        if ($success) {
+            return true;
+        }
+        return false;
     }
 }
