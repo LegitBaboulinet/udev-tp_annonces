@@ -34,7 +34,7 @@ if ($db != null) {
                 $userController->displayNewUser();
                 break;
             case 'login':
-                // TODO Gérer la connexion d'un utilisateur
+                $userController->displayLogin();
                 break;
             case 'userannonce':
                 if (isset($_GET['utilisateur'])) {
@@ -51,6 +51,9 @@ if ($db != null) {
                 break;
             case 'newuser':
                 $userController->newUser();
+                break;
+            case 'login':
+                $userController->login();
                 break;
         }
     } else {

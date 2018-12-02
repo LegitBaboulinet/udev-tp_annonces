@@ -43,4 +43,26 @@ class UserModel
         }
         return false;
     }
+
+    /**
+     * @param Utilisateur $user
+     * @return bool
+     */
+    public function estConnecte(Utilisateur $user)
+    {
+        // Préparation de la requête SQL
+        $query = $this->db->prepare('SELECT id FROM utilisateur WHERE login = ? AND password = ?');
+
+        // Exécution de la requête SQL
+        $success = $query->execute(array($user->getLogin(), $user->getPassword()));
+
+        if ($success) {
+            // Vérification de l'existence de l'utilisateur
+            if ($query->rowCount() == 1) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 }

@@ -43,6 +43,11 @@ class UserController
         $this->view->displayNewUser();
     }
 
+    public function displayLogin()
+    {
+        $this->view->displayLogin();
+    }
+
     public function newUser()
     {
         // Création de l'utilisateur
@@ -69,13 +74,41 @@ class UserController
                 // Création de la session
                 $_SESSION['utilisateur'] = $user;
 
-                // Redirection vers la page principale
+                // Affichage d'une confirmation
                 $this->view->displayConfirmation();
             } else {
                 $this->errorView->displayError();
             }
         } else {
             $this->errorView->displayError();
+        }
+    }
+
+    public function login()
+    {
+        $user = new Utilisateur();
+
+        // Parcours des valeurs
+        foreach ($_POST as $key => $value) {
+            switch ($key) {
+                case 'login':
+                    $user->setLogin((is_string($value)) ? $value : null);
+                    break;
+                case 'password':
+                    $user->setPassword((is_string($value)) ? $value : null);
+                    break;
+            }
+        }
+
+        // Vérification de la présence de l'utilisateur dans la base de données
+        if ($this->model->estConnecte($user)) {
+            // Création de la session et redirection vers la page principale
+            $_SESSION['utilisateur'] = $user;
+            header('Location: index.php?page=newannonce');
+            exit;
+        } else {
+            // Affichage d'une erreur lors de la connexion dûe à un mauvais nom d'utilisateur ou mot de passe
+            $this->view->displayErreurConnexion();
         }
     }
 }

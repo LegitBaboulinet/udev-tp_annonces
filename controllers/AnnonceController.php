@@ -74,7 +74,10 @@ class AnnonceController
         if ($annonce->getTitle() != null && $annonce->getContent()) {
             // Sauvegarde dans la base de données
             if ($this->model->sauvegarder($annonce)) {
-                $this->displayAnnonces();
+
+                // Redirection vers la page principale
+                header('Location: index.php');
+                exit;
             } else {
                 $this->errorView->displayError();
             }

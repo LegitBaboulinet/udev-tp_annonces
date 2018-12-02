@@ -20,3 +20,9 @@ CREATE TABLE Annonce (
 -- Insertion de l'utilisateur anonyme
 INSERT INTO Utilisateur (login, password, email)
 VALUES ('anonymous', NULL, 'anonymous@anonymous.test');
+
+-- Ajout du champ author_id
+ALTER TABLE Annonce
+ADD author_id INT NOT NULL DEFAULT 1;
+ALTER TABLE Annonce
+ADD FOREIGN KEY (author_id) REFERENCES Utilisateur(id);
