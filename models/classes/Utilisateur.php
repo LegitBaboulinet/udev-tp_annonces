@@ -35,12 +35,8 @@ class Utilisateur
      * @param string $password
      * @param string $email
      */
-    public function __construct($id, $login, $password, $email)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->login = $login;
-        $this->password = $password;
-        $this->email = $email;
     }
 
     /**

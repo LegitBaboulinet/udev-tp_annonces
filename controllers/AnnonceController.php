@@ -8,7 +8,6 @@
 
 include 'views/AnnonceView.php';
 include 'models/AnnonceModel.php';
-include 'views/ErrorView.php';
 
 
 class AnnonceController

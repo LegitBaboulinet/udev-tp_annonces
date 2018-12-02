@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Ajout d'une annonce</title>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -16,23 +18,27 @@
 </head>
 <body>
 <div class="container mt-4">
+    <h2>S'inscrire</h2>
+    <hr/>
     <div class="row">
         <div class="col-12">
-            <h2>Créer une nouvelle annonce</h2>
-            <hr/>
-            <form action="index.php?action=newannonce" method="POST" class="form mt-4">
+            <form action="index.php?action=newuser" method="POST" class="form">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Oeufs de dragon" name="title"/>
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" class="form-control" placeholder="Jean-LouisDu13" name="login"/>
                 </div>
                 <div class="form-group">
-                    <textarea cols="8" rows="20" class="form-control"
-                              placeholder="Parfait état, à mettre à la chaleur.."
-                              name="content"></textarea>
+                    <label>Mot de passe</label>
+                    <input type="password" class="form-control" placeholder="*********" name="password"/>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" placeholder="jean.louisdu13@gmail.com" name="email"/>
                 </div>
                 <div class="form-group text-right">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-plus"></i>
-                        Créer l'annonce
+                        <i class="fas fa-sign-in-alt"></i>
+                        S'inscrire
                     </button>
                 </div>
             </form>

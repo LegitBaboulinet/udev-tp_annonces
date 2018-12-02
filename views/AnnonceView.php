@@ -6,8 +6,6 @@
  * Time: 15:22
  */
 
-include 'libs/view.php';
-
 
 class AnnonceView
 {
@@ -26,6 +24,12 @@ class AnnonceView
         $data_array = [];
         $html = '';
 
+        // Récupération de l'utilisateur connecté
+        $login = 'anonymous';
+        if (isset($_SESSION['utilisateur'])) {
+            $login = $_SESSION['utilisateur']->getLogin();
+        }
+
         // Génération du HTML
         foreach ($annonces as $annonce) {
             $html .= '<div class="container">';
@@ -37,6 +41,7 @@ class AnnonceView
 
         // Ajout du HTML dans l'array
         $data_array['list'] = $html;
+        $data_array['login'] = $login;
 
         // Affichage du html dans le template des annonces
         afficherTemplate('views/templates/annonce/list.html', $data_array);

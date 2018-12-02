@@ -7,7 +7,14 @@
  */
 
 include 'libs/Connexion.php';
+include 'libs/view.php';
+include 'views/ErrorView.php';
 include 'controllers/AnnonceController.php';
+include 'controllers/UserController.php';
+
+
+// Démarrage de la sesson
+session_start();
 
 // Connexion à la base de données
 $connexion = new Connexion();
@@ -16,6 +23,7 @@ $db = $connexion->getDb();
 if ($db != null) {
     // Liaison des contrôleurs
     $annonceController = new AnnonceController($db);
+    $userController = new UserController($db);
 
     if (isset($_GET['page'])) {
         switch ($_GET['page']) {
@@ -23,7 +31,7 @@ if ($db != null) {
                 $annonceController->displayNewAnnonce();
                 break;
             case 'newuser':
-                // TODO Gérer la création d'un nouvel utilisateur
+                $userController->displayNewUser();
                 break;
             case 'login':
                 // TODO Gérer la connexion d'un utilisateur
@@ -40,6 +48,9 @@ if ($db != null) {
         switch ($_GET['action']) {
             case 'newannonce':
                 $annonceController->newAnnonce();
+                break;
+            case 'newuser':
+                $userController->newUser();
                 break;
         }
     } else {
