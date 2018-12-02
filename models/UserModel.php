@@ -29,7 +29,7 @@ class UserModel
      * @param User $user
      * @return bool
      */
-    public function sauvegarder(Utilisateur $user)
+    public function sauvegarder(Utilisateur &$user)
     {
         // Préparation de la requête SQL
         $query = $this->db->prepare('INSERT INTO utilisateur (login, password, email) VALUES (?, ?, ?)');
@@ -39,6 +39,7 @@ class UserModel
 
         // Vérification des résultats
         if ($success) {
+            $user->setId($this->db->lastInsertId());
             return true;
         }
         return false;
@@ -48,10 +49,10 @@ class UserModel
      * @param Utilisateur $user
      * @return bool
      */
-    public function estConnecte(Utilisateur $user)
+    public function estConnecte(Utilisateur &$user)
     {
         // Préparation de la requête SQL
-        $query = $this->db->prepare('SELECT id FROM utilisateur WHERE login = ? AND password = ?');
+        $query = $this->db->prepare('SELECT id, email FROM utilisateur WHERE login = ? AND password = ?');
 
         // Exécution de la requête SQL
         $success = $query->execute(array($user->getLogin(), $user->getPassword()));
@@ -59,6 +60,11 @@ class UserModel
         if ($success) {
             // Vérification de l'existence de l'utilisateur
             if ($query->rowCount() == 1) {
+                $query->bindColumn(1, $id);
+                $query->bindColumn(2, $email);
+                $query->fetch();
+                $user->setId($id);
+                $user->setEmail($email);
                 return true;
             }
             return false;

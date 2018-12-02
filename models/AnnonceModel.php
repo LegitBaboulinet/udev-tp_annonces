@@ -32,10 +32,10 @@ class AnnonceModel
     public function sauvegarder(Annonce $annonce)
     {
         // Préparation de la requête SQL
-        $query = $this->db->prepare('INSERT INTO Annonce (title, content) VALUES (?, ?)');
+        $query = $this->db->prepare('INSERT INTO Annonce (title, content, author_id) VALUES (?, ?, ?)');
 
         // Exécution de la requête SQL
-        $success = $query->execute(array($annonce->getTitle(), $annonce->getContent()));
+        $success = $query->execute(array($annonce->getTitle(), $annonce->getContent(), $annonce->getAuthorId()));
 
         // Vérification des résultats
         if ($success) {

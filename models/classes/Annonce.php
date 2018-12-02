@@ -29,6 +29,11 @@ class Annonce
     private $date;
 
     /**
+     * @var int
+     */
+    private $author_id;
+
+    /**
      * Annonce constructor.
      */
     public function __construct()
@@ -97,5 +102,21 @@ class Annonce
     public function setDate($date)
     {
         $this->date = $date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAuthorId()
+    {
+        return $this->author_id;
+    }
+
+    /**
+     * @param int $author_id
+     */
+    public function setAuthorId($author_id)
+    {
+        $this->author_id = $author_id;
     }
 }

@@ -68,10 +68,14 @@ class AnnonceController
                     break;
                 case 'content':
                     $annonce->setContent((is_string($value)) ? $value : null);
+                    break;
+                case 'id':
+                    $annonce->setAuthorId((is_numeric($value)) ? $value : 1);
+                    break;
             }
         }
 
-        if ($annonce->getTitle() != null && $annonce->getContent()) {
+        if ($annonce->getTitle() != null && $annonce->getContent() != null) {
             // Sauvegarde dans la base de données
             if ($this->model->sauvegarder($annonce)) {
 

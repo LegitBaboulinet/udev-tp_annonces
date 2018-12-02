@@ -49,7 +49,20 @@ class AnnonceView
 
     public function displayNewAnnonce()
     {
-        $html = file_get_contents('views/templates/annonce/edit.html');
-        echo $html;
+        $data_array = [];
+
+        // Récupération de l'utilisateur connecté
+        $id = '1';
+        if (isset($_SESSION['utilisateur'])) {
+            $id = $_SESSION['utilisateur']->getId();
+        }
+
+        // Ajout de l'ID dans le champ caché
+        // -----------------------------------------------------------------------------------
+        // Je ne comprend cependant pas pourquoi on doit utiliser un champ caché,
+        // qui, est en soit une énorme faille de sécurité.
+        // Pourquoi ne pas utiliser l'ID de l'utilisateur stocké dans la session directement ?
+        $data_array['id'] = $id;
+        afficherTemplate('views/templates/annonce/edit.html', $data_array);
     }
 }
