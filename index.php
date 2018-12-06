@@ -40,7 +40,7 @@ if ($db != null) {
                 if (isset($_GET['utilisateur'])) {
                     $annonceController->displayAnnoncesUtilisateur();
                 } else {
-                    // TODO Afficher tous les utilisateurs ayant posté au moins une annonce
+                    $userController->displayUsersAnnonces();
                 }
                 break;
         }

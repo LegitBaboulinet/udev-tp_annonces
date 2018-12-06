@@ -74,6 +74,42 @@ class UserModel
 
     public function getUsersAnnonces()
     {
+        // Préparation de la requête SQL
+        $sql = '
+            SELECT DISTINCT u.login, u.email
+            FROM annonce a
+            INNER JOIN utilisateur u ON u.id = a.author_id
+            WHERE a.author_id != (
+              SELECT ID
+              FROM Utilisateur
+              WHERE login = \'anonymous\'
+            )
+        ';
+        $query = $this->db->prepare($sql);
 
+        // Exécution de la requête SQL
+        $success = $query->execute();
+
+        if ($success) {
+            $users = [];
+
+            // Liaison des résultats
+            $query->bindColumn(1, $login);
+            $query->bindColumn(2, $email);
+
+            // Récupération des résultats
+            while ($query->fetch()) {
+                // Création de l'utilisateur
+                $user = new Utilisateur();
+                $user->setLogin($login);
+                $user->setEmail($email);
+
+                // Ajout de l'utilisateur à la liste
+                $users[] = $user;
+            }
+
+            // Retour de la liste
+            return $users;
+        }
     }
 }

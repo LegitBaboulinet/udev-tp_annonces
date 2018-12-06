@@ -111,4 +111,13 @@ class UserController
             $this->view->displayErreurConnexion();
         }
     }
+
+    public function displayUsersAnnonces()
+    {
+        // Récupération des utilisateurs
+        $users = $this->model->getUsersAnnonces();
+
+        // Affichage dans la vue
+        $this->view->displayUsersAnnonces($users);
+    }
 }
