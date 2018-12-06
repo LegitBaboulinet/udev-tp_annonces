@@ -45,14 +45,32 @@ class AnnonceModel
     }
 
     /**
+     * @param bool $byLoggedUser
+     * @param int $userId
      * @return array|null
      */
-    public function charger()
+    public function charger($byLoggedUser = false, $userId = 0)
     {
         $annonces = [];
 
+        // Vérification des paramètres
+        $byLoggedUser = (is_bool($byLoggedUser)) ? $byLoggedUser : false;
+        $userId = (is_numeric($userId)) ? $userId : 0;
+
         // Préparation de la requête SQL
-        $query = $this->db->prepare('SELECT id, title, content, date FROM annonce');
+        $sql = 'SELECT id, title, content, date FROM annonce WHERE 1=1 ';
+        if ($byLoggedUser) {
+            $sql .= ' AND author_id != ( SELECT ID FROM Utilisateur WHERE login = \'anonymous\' )';
+        }
+        if ($userId > 0) {
+            $sql .= ' AND author_id = ?';
+        }
+        $query = $this->db->prepare($sql);
+
+        // Liaison des paramètres
+        if ($userId > 0) {
+            $query->bindParam(1, $userId);
+        }
 
         // Exécution de la requête SQL
         $success = $query->execute();

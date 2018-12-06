@@ -89,4 +89,17 @@ class AnnonceController
             $this->errorView->displayError();
         }
     }
+
+    public function displayAnnoncesUtilisateur()
+    {
+        // Récupération des annonces
+        $annonces = $this->model->charger(false, $_GET['utilisateur']);
+
+        // Affichage des annonces
+        if ($annonces != null) {
+            $this->view->displayAnnonces($annonces);
+        } else {
+            $this->errorView->displayError();
+        }
+    }
 }

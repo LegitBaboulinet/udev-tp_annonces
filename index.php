@@ -38,7 +38,7 @@ if ($db != null) {
                 break;
             case 'userannonce':
                 if (isset($_GET['utilisateur'])) {
-                    // TODO Afficher les annonces de l'utilisateur donné en paramètre
+                    $annonceController->displayAnnoncesUtilisateur();
                 } else {
                     // TODO Afficher tous les utilisateurs ayant posté au moins une annonce
                 }

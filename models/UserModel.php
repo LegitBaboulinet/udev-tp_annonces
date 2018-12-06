@@ -71,4 +71,9 @@ class UserModel
         }
         return false;
     }
+
+    public function getUsersAnnonces()
+    {
+
+    }
 }
